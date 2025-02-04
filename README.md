@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мій Сайт</title>
+    <title>Клуб убийц</title>
     <style>
         body {
             background-color: #111;
@@ -16,10 +16,12 @@
         header {
             background-color: #222;
             padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         nav {
             display: flex;
-            justify-content: center;
             gap: 20px;
         }
         nav a {
@@ -33,112 +35,122 @@
         nav a:hover {
             background-color: #555;
         }
-        section {
-            padding: 40px;
-            border-bottom: 1px solid #333;
-        }
-        .btn {
+        .language-menu {
+            position: relative;
             display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            background-color: #444;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
         }
-        .btn:hover {
-            background-color: #666;
-        }
-        .menu {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #222;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .menu button {
+        .language-menu button {
             background: none;
             border: none;
             color: white;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
         }
-        .menu-content {
+        .language-dropdown {
             display: none;
-            background-color: #333;
-            padding: 10px;
             position: absolute;
             right: 0;
-            top: 30px;
-            width: 150px;
+            background-color: #333;
             border-radius: 5px;
+            padding: 5px;
         }
-        .menu-content a {
+        .language-dropdown button {
             display: block;
+            background: none;
+            border: none;
             color: white;
-            text-decoration: none;
-            padding: 5px 0;
+            padding: 5px 10px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
         }
-        .menu-content a:hover {
-            background-color: #444;
+        .language-dropdown button:hover {
+            background-color: #555;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>клуб убийц</h1>
+  <header>
+        <h1 id="site-title">Клуб убийц</h1>
         <nav>
-            <a href="#concerts">Дата концертів</a>
-            <a href="#shop">Магазин</a>
-            <a href="#releases">Релізи</a>
-            <a href="#contacts">Контакти</a>
+            <a href="#concerts" id="nav-concerts">Дата концертов</a>
+            <a href="#shop" id="nav-shop">Магазин</a>
+            <a href="#releases" id="nav-releases">Релизы</a>
+            <a href="#contacts" id="nav-contacts">Контакты</a>
         </nav>
+        <div class="language-menu">
+            <button onclick="toggleLanguageMenu()">🌍</button>
+            <div class="language-dropdown" id="languageDropdown">
+                <button onclick="changeLanguage('ru')">Русский</button>
+                <button onclick="changeLanguage('uk')">Українська</button>
+                <button onclick="changeLanguage('en')">English</button>
+                <button onclick="changeLanguage('de')">Deutsch</button>
+            </div>
+        </div>
     </header>
 
-    <section id="concerts">
-        <h2>Дата концертів</h2>
-        <p>Тут будуть дати твоїх концертів.</p>
+<section id="concerts">
+        <h2 id="concerts-title">Дата концертов</h2>
+        <p id="concerts-text">Скоро</p>
     </section>
 
-    <section id="shop">
-        <h2>Магазин</h2>
-        <p>Тут буде магазин із твоїми товарами.</p>
-        <button class="btn">Перейти в магазин</button>
+<section id="shop">
+        <h2 id="shop-title">Магазин</h2>
+        <p id="shop-text">Скоро</p>
+        <button id="shop-btn">Перейти в магазин</button>
     </section>
 
-    <section id="releases">
-        <h2>Релізи</h2>
-        <p>Список останніх релізів.</p>
+<section id="releases">
+        <h2 id="releases-title">Релизы</h2>
+        <p id="releases-text">Скоро</p>
     </section>
 
-    <section id="contacts">
-        <h2>Контакти</h2>
-        <p>Email: example@email.com</p>
-        <p>Телефон: +380 12 345 6789</p>
+<section id="contacts">
+        <h2 id="contacts-title">Контакты</h2>
+        <p>Email: <a href="mailto:ubijcklub@gmail.com" style="color: white; text-decoration: none;">ubijcklub@gmail.com</a></p>
+        <p id="phone-text">Телефон: Скоро</p>
     </section>
 
-    <div class="menu">
-        <button onclick="toggleMenu()">☰</button>
-        <div class="menu-content" id="menuContent">
-            <a href="#">Профіль</a>
-            <a href="#">Магазин</a>
-            <a href="#">Техпідтримка</a>
-        </div>
-    </div>
-
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById("menuContent");
-            if (menu.style.display === "block") {
-                menu.style.display = "none";
-            } else {
-                menu.style.display = "block";
-            }
+ <script>
+        function toggleLanguageMenu() {
+            var menu = document.getElementById("languageDropdown");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
         }
+
+        function changeLanguage(lang) {
+            const translations = {
+                ru: { title: "Клуб убийц", navConcerts: "Дата концертов", navShop: "Магазин", navReleases: "Релизы", navContacts: "Контакты", concertsTitle: "Дата концертов", concertsText: "Скоро", shopTitle: "Магазин", shopText: "Скоро", shopBtn: "Перейти в магазин", releasesTitle: "Релизы", releasesText: "Скоро", contactsTitle: "Контакты", phoneText: "Телефон: Скоро" },
+                uk: { title: "Клуб убивць", navConcerts: "Дата концертів", navShop: "Магазин", navReleases: "Релізи", navContacts: "Контакти", concertsTitle: "Дата концертів", concertsText: "Скоро", shopTitle: "Магазин", shopText: "Скоро", shopBtn: "Перейти в магазин", releasesTitle: "Релізи", releasesText: "Скоро", contactsTitle: "Контакти", phoneText: "Телефон: Скоро" },
+                en: { title: "Killers Club", navConcerts: "Concert Dates", navShop: "Shop", navReleases: "Releases", navContacts: "Contacts", concertsTitle: "Concert Dates", concertsText: "Coming Soon", shopTitle: "Shop", shopText: "Coming Soon", shopBtn: "Go to Shop", releasesTitle: "Releases", releasesText: "Coming Soon", contactsTitle: "Contacts", phoneText: "Phone: Coming Soon" },
+                de: { title: "Mörderclub", navConcerts: "Konzerttermine", navShop: "Shop", navReleases: "Veröffentlichungen", navContacts: "Kontakt", concertsTitle: "Konzerttermine", concertsText: "Bald verfügbar", shopTitle: "Shop", shopText: "Bald verfügbar", shopBtn: "Zum Shop", releasesTitle: "Veröffentlichungen", releasesText: "Bald verfügbar", contactsTitle: "Kontakt", phoneText: "Telefon: Bald verfügbar" }
+            };
+
+            let t = translations[lang];
+            document.getElementById("site-title").innerText = t.title;
+            document.getElementById("nav-concerts").innerText = t.navConcerts;
+            document.getElementById("nav-shop").innerText = t.navShop;
+            document.getElementById("nav-releases").innerText = t.navReleases;
+            document.getElementById("nav-contacts").innerText = t.navContacts;
+            document.getElementById("concerts-title").innerText = t.concertsTitle;
+            document.getElementById("concerts-text").innerText = t.concertsText;
+            document.getElementById("shop-title").innerText = t.shopTitle;
+            document.getElementById("shop-text").innerText = t.shopText;
+            document.getElementById("shop-btn").innerText = t.shopBtn;
+            document.getElementById("releases-title").innerText = t.releasesTitle;
+            document.getElementById("releases-text").innerText = t.releasesText;
+            document.getElementById("contacts-title").innerText = t.contactsTitle;
+            document.getElementById("phone-text").innerText = t.phoneText;
+
+            document.getElementById("languageDropdown").style.display = "none";
+        }
+
+        document.addEventListener("click", function(event) {
+            var menu = document.getElementById("languageDropdown");
+            if (!event.target.closest(".language-menu")) {
+                menu.style.display = "none";
+            }
+        });
     </script>
 
 </body>
