@@ -1,209 +1,177 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мій сайт</title>
+    <title>Клуб убийц</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #111;
+            background-color: #111;
             color: white;
+            font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #222;
             padding: 20px;
         }
-
-  /* ===== Меню ===== */
-        .menu {
-            background: #222;
-            padding: 10px;
-            border-radius: 10px;
+        nav {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 20px;
         }
-        .menu button {
-            background: #333;
+        nav a, .btn, .menu button {
             color: white;
-            border: none;
+            text-decoration: none;
             padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
+            background-color: #333;
             border-radius: 5px;
             transition: 0.3s;
-        }
-        .menu button:hover {
-            background: #1db954;
-        }
-
-/* ===== Музичний плеєр ===== */
-        .player {
-            background: #222;
-            padding: 20px;
-            border-radius: 10px;
-            display: inline-block;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 5px;
-            background: #444;
-            margin: 10px 0;
+            border: none;
             cursor: pointer;
         }
-        .progress {
-            height: 5px;
-            background: #1db954;
-            width: 0%;
+        nav a:hover, .btn:hover, .menu button:hover {
+            background-color: #555;
         }
-        input[type="range"] {
-            width: 100px;
-    }    
-  /* ===== Селектор мов ===== */
-        .language-selector {
+        section {
+            padding: 40px;
+            border-bottom: 1px solid #333;
+        }
+        .menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #222;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .menu-content {
+            display: none;
+            background-color: #333;
+            padding: 10px;
+            position: absolute;
+            right: 0;
+            top: 30px;
+            width: 150px;
+            border-radius: 5px;
+        }
+        .menu-content a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 5px 0;
+        }
+        .menu-content a:hover {
+            background-color: #444;
+        }
+        .player {
             margin-top: 20px;
         }
         select {
-            padding: 5px;
-            font-size: 16px;
+            padding: 10px;
             border-radius: 5px;
-        }
-
-   /* ===== Донат ===== */
-        .donate {
-            margin-top: 20px;
-        }
-        .donate a {
-            background: #ffcc00;
-            color: black;
-            padding: 10px 15px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .donate a:hover {
-            background: #ffaa00;
+            border: none;
+            background: #333;
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
- <h1>🎵 Мій музичний сайт 🎵</h1>
-<!-- Меню -->
-    <div class="menu">
-        <button onclick="goTo('home')">🏠 Головна</button>
-        <button onclick="goTo('concerts')">🎤 Дата концертів</button>
-        <button onclick="goTo('store')">🛒 Магазин</button>
-        <button onclick="goTo('releases')">🎶 Релізи</button>
-        <button onclick="goTo('contacts')">📞 Контакти</button>
-        <button onclick="goTo('support')">🔧 Техпідтримка</button>
-        <button onclick="goTo('profile')">👤 Профіль</button>
-    </div>
- <!-- Музичний плеєр -->
-    <div class="player">
-        <h2 id="track-title">Трек 1</h2>
-        <audio id="audio" src="спокойный вечерний плейлист #2 2.mp3"></audio>
+ <header>
+        <h1>Клуб убийц</h1>
+        <nav>
+            <a href="#concerts">Дата концертів</a>
+            <a href="#shop">Магазин</a>
+            <a href="#releases">Релізи</a>
+            <a href="#contacts">Контакти</a>
+        </nav>
+    </header>
 
-   <div class="progress-bar" onclick="setProgress(event)">
-            <div class="progress" id="progress"></div>
+ <section id="concerts">
+        <h2>Дата концертів</h2>
+        <p>Скоро</p>
+    </section>
+
+<section id="shop">
+        <h2>Магазин</h2>
+        <p>Скоро</p>
+        <button class="btn">Перейти в магазин</button>
+    </section>
+
+ <section id="releases">
+        <h2>Релізи</h2>
+        <p>Скоро</p>
+    </section>
+
+ <section id="contacts">
+        <h2>Контакти</h2>
+        <p>Email: <a href="mailto:ubijcklub@gmail.com" style="color: white; text-decoration: none;">ubijcklub@gmail.com</a></p>
+        <p>Телефон: Скоро</p>
+    </section>
+
+ <div class="menu">
+        <button onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent">
+            <a href="#">Профіль</a>
+            <a href="#">Магазин</a>
+            <a href="#">Техпідтримка</a>
         </div>
-
- <div>
-            <button onclick="prevTrack()">⏮</button>
-            <button onclick="togglePlayPause()">⏯</button>
-            <button onclick="nextTrack()">⏭</button>
-        </div>
-
- <br>
-        <label>🔊 Гучність: <input type="range" id="volume" min="0" max="1" step="0.1" onchange="changeVolume(this.value)"></label>
     </div>
- <!-- Вибір мови -->
-    <div class="language-selector">
-        <h3>🌍 Виберіть мову:</h3>
-        <select id="language" onchange="changeLanguage(this.value)">
-            <option value="uk">Українська</option>
-            <option value="en">English</option>
-            <option value="ru">Русский</option>
-            <option value="de">Deutsch</option>
-            <option value="fr">Français</option>
-            <option value="es">Español</option>
-            <!-- Додати інші мови зі списку -->
+
+<section>
+        <h2>Музичний плеєр</h2>
+        <audio controls class="player">
+            <source src="спокойный вечерний плейлист #2 2.mp3" type="audio/mpeg">
+            Ваш браузер не підтримує аудіо.
+        </audio>
+    </section>
+
+ <section>
+        <h2>Вибір мови</h2>
+        <select id="language">
+            <option>Англійська</option>
+            <option>Українська</option>
+            <option>Російська</option>
+            <option>Французька</option>
+            <option>Іспанська</option>
+            <option>Німецька</option>
+            <option>Італійська</option>
+            <option>Китайська</option>
+            <option>Японська</option>
+            <option>КореЙська</option>
+  <!-- Додай ще інші мови, якщо потрібно -->
         </select>
-    </div>
-  <!-- Донат -->
-    <div class="donate">
-        <h3>❤️ Підтримати проект:</h3>
-        <a href="https://www.donationalerts.com/r/tenicumerek" target="_blank">💰 Донат</a>
-    </div>
+    </section>
+
+ <section>
+        <h2>Вибір країни проживання</h2>
+        <select id="country">
+            <option>Україна</option>
+            <option>США</option>
+            <option>Велика Британія</option>
+            <option>Канада</option>
+            <option>Німеччина</option>
+            <option>Франція</option>
+            <option>Іспанія</option>
+            <option>Китай</option>
+            <option>Японія</option>
+            <option>Корея</option>
+            <!-- Додай ще країни, якщо потрібно -->
+        </select>
+    </section>
+
  <script>
-        // ======= Музичний плеєр =======
-        const tracks = [
-            { title: "Трек 1", src: "спокойный вечерний плейлист #2 2.mp3" },
-            { title: "Трек 2", src: "track2.mp3" }, // Можна додати ще файли
-            { title: "Трек 3", src: "track3.mp3" }
-        ];
-        let currentTrack = 0;
-
-  const audio = document.getElementById("audio");
-        const trackTitle = document.getElementById("track-title");
-        const progress = document.getElementById("progress");
-
- function togglePlayPause() {
-            if (audio.paused) {
-                audio.play();
+        function toggleMenu() {
+            var menu = document.getElementById("menuContent");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
             } else {
-                audio.pause();
+                menu.style.display = "block";
             }
-        }
-
- function nextTrack() {
-            currentTrack = (currentTrack + 1) % tracks.length;
-            loadTrack();
-            audio.play();
-        }
-
- function prevTrack() {
-            currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-            loadTrack();
-            audio.play();
-        }
-
- function loadTrack() {
-            audio.src = tracks[currentTrack].src;
-            trackTitle.innerText = tracks[currentTrack].title;
-        }
-
-function setProgress(event) {
-            const width = event.target.clientWidth;
-            const clickX = event.offsetX;
-            const duration = audio.duration;
-            audio.currentTime = (clickX / width) * duration;
-        }
-
-function changeVolume(value) {
-            audio.volume = value;
-        }
-
-audio.addEventListener("timeupdate", () => {
-            const progressPercent = (audio.currentTime / audio.duration) * 100; progress.style.width
-            
-            
-`${progressPercent}%`        });
-
-audio.addEventListener("ended", nextTrack);
-
-// ======= Меню =======
-        function goTo(page) {
-            alert("Перехід на сторінку: " + page);
-        }
-
-// ======= Зміна мови =======
-        function changeLanguage(lang) {
-            alert("Змінено мову на: " + lang);
         }
     </script>
 
