@@ -1,156 +1,210 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Клуб убийц</title>
+    <title>Мій сайт</title>
     <style>
         body {
-            background-color: #111;
-            color: white;
             font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
             text-align: center;
             margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #222;
             padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
-        nav {
+
+  /* ===== Меню ===== */
+        .menu {
+            background: #222;
+            padding: 10px;
+            border-radius: 10px;
             display: flex;
-            gap: 20px;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-        nav a {
+        .menu button {
+            background: #333;
             color: white;
-            text-decoration: none;
+            border: none;
             padding: 10px 15px;
-            background-color: #333;
+            font-size: 16px;
+            cursor: pointer;
             border-radius: 5px;
             transition: 0.3s;
         }
-        nav a:hover {
-            background-color: #555;
+        .menu button:hover {
+            background: #1db954;
         }
-        .language-menu {
-            position: relative;
+
+/* ===== Музичний плеєр ===== */
+        .player {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
             display: inline-block;
+            text-align: center;
+            margin-top: 20px;
         }
-        .language-menu button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        .language-dropdown {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #333;
-            border-radius: 5px;
-            padding: 5px;
-        }
-        .language-dropdown button {
-            display: block;
-            background: none;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            cursor: pointer;
+        .progress-bar {
             width: 100%;
-            text-align: left;
+            height: 5px;
+            background: #444;
+            margin: 10px 0;
+            cursor: pointer;
         }
-        .language-dropdown button:hover {
-            background-color: #555;
+        .progress {
+            height: 5px;
+            background: #1db954;
+            width: 0%;
+        }
+        input[type="range"] {
+            width: 100px;
+    }    
+  /* ===== Селектор мов ===== */
+        .language-selector {
+            margin-top: 20px;
+        }
+        select {
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+   /* ===== Донат ===== */
+        .donate {
+            margin-top: 20px;
+        }
+        .donate a {
+            background: #ffcc00;
+            color: black;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .donate a:hover {
+            background: #ffaa00;
         }
     </style>
 </head>
 <body>
 
-  <header>
-        <h1 id="site-title">Клуб убийц</h1>
-        <nav>
-            <a href="#concerts" id="nav-concerts">Дата концертов</a>
-            <a href="#shop" id="nav-shop">Магазин</a>
-            <a href="#releases" id="nav-releases">Релизы</a>
-            <a href="#contacts" id="nav-contacts">Контакты</a>
-        </nav>
-        <div class="language-menu">
-            <button onclick="toggleLanguageMenu()">🌍</button>
-            <div class="language-dropdown" id="languageDropdown">
-                <button onclick="changeLanguage('ru')">Русский</button>
-                <button onclick="changeLanguage('uk')">Українська</button>
-                <button onclick="changeLanguage('en')">English</button>
-                <button onclick="changeLanguage('de')">Deutsch</button>
-            </div>
+ <h1>🎵 Мій музичний сайт 🎵</h1>
+<!-- Меню -->
+    <div class="menu">
+        <button onclick="goTo('home')">🏠 Головна</button>
+        <button onclick="goTo('concerts')">🎤 Дата концертів</button>
+        <button onclick="goTo('store')">🛒 Магазин</button>
+        <button onclick="goTo('releases')">🎶 Релізи</button>
+        <button onclick="goTo('contacts')">📞 Контакти</button>
+        <button onclick="goTo('support')">🔧 Техпідтримка</button>
+        <button onclick="goTo('profile')">👤 Профіль</button>
+    </div>
+ <!-- Музичний плеєр -->
+    <div class="player">
+        <h2 id="track-title">Трек 1</h2>
+        <audio id="audio" src="спокойный вечерний плейлист #2 2.mp3"></audio>
+
+   <div class="progress-bar" onclick="setProgress(event)">
+            <div class="progress" id="progress"></div>
         </div>
-    </header>
 
-<section id="concerts">
-        <h2 id="concerts-title">Дата концертов</h2>
-        <p id="concerts-text">Скоро</p>
-    </section>
+ <div>
+            <button onclick="prevTrack()">⏮</button>
+            <button onclick="togglePlayPause()">⏯</button>
+            <button onclick="nextTrack()">⏭</button>
+        </div>
 
-<section id="shop">
-        <h2 id="shop-title">Магазин</h2>
-        <p id="shop-text">Скоро</p>
-        <button id="shop-btn">Перейти в магазин</button>
-    </section>
-
-<section id="releases">
-        <h2 id="releases-title">Релизы</h2>
-        <p id="releases-text">Скоро</p>
-    </section>
-
-<section id="contacts">
-        <h2 id="contacts-title">Контакты</h2>
-        <p>Email: <a href="mailto:ubijcklub@gmail.com" style="color: white; text-decoration: none;">ubijcklub@gmail.com</a></p>
-        <p id="phone-text">Телефон: Скоро</p>
-    </section>
-
+ <br>
+        <label>🔊 Гучність: <input type="range" id="volume" min="0" max="1" step="0.1" onchange="changeVolume(this.value)"></label>
+    </div>
+ <!-- Вибір мови -->
+    <div class="language-selector">
+        <h3>🌍 Виберіть мову:</h3>
+        <select id="language" onchange="changeLanguage(this.value)">
+            <option value="uk">Українська</option>
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <!-- Додати інші мови зі списку -->
+        </select>
+    </div>
+  <!-- Донат -->
+    <div class="donate">
+        <h3>❤️ Підтримати проект:</h3>
+        <a href="https://www.donationalerts.com/r/tenicumerek" target="_blank">💰 Донат</a>
+    </div>
  <script>
-        function toggleLanguageMenu() {
-            var menu = document.getElementById("languageDropdown");
-            menu.style.display = (menu.style.display === "block") ? "none" : "block";
-        }
+        // ======= Музичний плеєр =======
+        const tracks = [
+            { title: "Трек 1", src: "спокойный вечерний плейлист #2 2.mp3" },
+            { title: "Трек 2", src: "track2.mp3" }, // Можна додати ще файли
+            { title: "Трек 3", src: "track3.mp3" }
+        ];
+        let currentTrack = 0;
 
-        function changeLanguage(lang) {
-            const translations = {
-                ru: { title: "Клуб убийц", navConcerts: "Дата концертов", navShop: "Магазин", navReleases: "Релизы", navContacts: "Контакты", concertsTitle: "Дата концертов", concertsText: "Скоро", shopTitle: "Магазин", shopText: "Скоро", shopBtn: "Перейти в магазин", releasesTitle: "Релизы", releasesText: "Скоро", contactsTitle: "Контакты", phoneText: "Телефон: Скоро" },
-                uk: { title: "Клуб убивць", navConcerts: "Дата концертів", navShop: "Магазин", navReleases: "Релізи", navContacts: "Контакти", concertsTitle: "Дата концертів", concertsText: "Скоро", shopTitle: "Магазин", shopText: "Скоро", shopBtn: "Перейти в магазин", releasesTitle: "Релізи", releasesText: "Скоро", contactsTitle: "Контакти", phoneText: "Телефон: Скоро" },
-                en: { title: "Killers Club", navConcerts: "Concert Dates", navShop: "Shop", navReleases: "Releases", navContacts: "Contacts", concertsTitle: "Concert Dates", concertsText: "Coming Soon", shopTitle: "Shop", shopText: "Coming Soon", shopBtn: "Go to Shop", releasesTitle: "Releases", releasesText: "Coming Soon", contactsTitle: "Contacts", phoneText: "Phone: Coming Soon" },
-                de: { title: "Mörderclub", navConcerts: "Konzerttermine", navShop: "Shop", navReleases: "Veröffentlichungen", navContacts: "Kontakt", concertsTitle: "Konzerttermine", concertsText: "Bald verfügbar", shopTitle: "Shop", shopText: "Bald verfügbar", shopBtn: "Zum Shop", releasesTitle: "Veröffentlichungen", releasesText: "Bald verfügbar", contactsTitle: "Kontakt", phoneText: "Telefon: Bald verfügbar" }
-            };
+  const audio = document.getElementById("audio");
+        const trackTitle = document.getElementById("track-title");
+        const progress = document.getElementById("progress");
 
-            let t = translations[lang];
-            document.getElementById("site-title").innerText = t.title;
-            document.getElementById("nav-concerts").innerText = t.navConcerts;
-            document.getElementById("nav-shop").innerText = t.navShop;
-            document.getElementById("nav-releases").innerText = t.navReleases;
-            document.getElementById("nav-contacts").innerText = t.navContacts;
-            document.getElementById("concerts-title").innerText = t.concertsTitle;
-            document.getElementById("concerts-text").innerText = t.concertsText;
-            document.getElementById("shop-title").innerText = t.shopTitle;
-            document.getElementById("shop-text").innerText = t.shopText;
-            document.getElementById("shop-btn").innerText = t.shopBtn;
-            document.getElementById("releases-title").innerText = t.releasesTitle;
-            document.getElementById("releases-text").innerText = t.releasesText;
-            document.getElementById("contacts-title").innerText = t.contactsTitle;
-            document.getElementById("phone-text").innerText = t.phoneText;
-
-            document.getElementById("languageDropdown").style.display = "none";
-        }
-
-        document.addEventListener("click", function(event) {
-            var menu = document.getElementById("languageDropdown");
-            if (!event.target.closest(".language-menu")) {
-                menu.style.display = "none";
+ function togglePlayPause() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
             }
-        });
+        }
+
+ function nextTrack() {
+            currentTrack = (currentTrack + 1) % tracks.length;
+            loadTrack();
+            audio.play();
+        }
+
+ function prevTrack() {
+            currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+            loadTrack();
+            audio.play();
+        }
+
+ function loadTrack() {
+            audio.src = tracks[currentTrack].src;
+            trackTitle.innerText = tracks[currentTrack].title;
+        }
+
+function setProgress(event) {
+            const width = event.target.clientWidth;
+            const clickX = event.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        }
+
+function changeVolume(value) {
+            audio.volume = value;
+        }
+
+audio.addEventListener("timeupdate", () => {
+            const progressPercent = (audio.currentTime / audio.duration) * 100; progress.style.width
+            
+            
+`${progressPercent}%`        });
+
+audio.addEventListener("ended", nextTrack);
+
+// ======= Меню =======
+        function goTo(page) {
+            alert("Перехід на сторінку: " + page);
+        }
+
+// ======= Зміна мови =======
+        function changeLanguage(lang) {
+            alert("Змінено мову на: " + lang);
+        }
     </script>
 
 </body>
